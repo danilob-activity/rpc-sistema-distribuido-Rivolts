@@ -6,7 +6,7 @@ class RPCClient
     {
         try
         {
-            InetAddress ia = InetAddress.getLocalHost();
+            InetAddress ia = InetAddress.getByName("10.106.6.88");
             DatagramSocket ds = new DatagramSocket();
             DatagramSocket ds1 = new DatagramSocket(1300);
             System.out.println("\nRPC Client\n");
@@ -17,8 +17,9 @@ class RPCClient
                 String str = br.readLine();
                 byte b[] = str.getBytes();
                 DatagramPacket dp =  new DatagramPacket(b,b.length,ia,1200);
+                byte b1[] = new byte[500];
                 ds.send(dp);
-                dp = new DatagramPacket(b,b.length);
+                dp = new DatagramPacket(b1,b1.length);
                 ds1.receive(dp);
                 String s = new String(dp.getData(),0,dp.getLength());
                 System.out.println("\nResultado = " + s +"\n");
